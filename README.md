@@ -57,6 +57,8 @@ npm install
 npm start
 ```
 
+The first `npm start` downloads the Electron binary (about 100 MB). Recent npm versions may print an `allow-scripts` warning for `koffi`; it is safe to ignore, since koffi ships prebuilt binaries.
+
 The Mage appears on your desktop and a tray icon shows up. Right-click the tray icon for the menu, or open **Settings**.
 
 Optional:

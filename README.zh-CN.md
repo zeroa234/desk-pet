@@ -57,6 +57,8 @@ npm install
 npm start
 ```
 
+第一次 `npm start` 会下载 Electron 本体（约 100 MB）。新版 npm 可能对 `koffi` 打一条 `allow-scripts` 警告，可以不管（koffi 自带预编译文件）。
+
 魔法师会出现在桌面上，托盘里多一个图标。右键托盘图标打开菜单，或者打开 **设置**。
 
 其它：
