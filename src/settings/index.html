@@ -1,0 +1,16 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<!-- import map 是内联脚本，CSP 按它的 sha256 放行；改了 import map 要重算（tests/settings-ui.test.ts 会查） -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self' pet:; script-src 'self' pet: 'sha256-aEUO0NG2jgpPUoREp+5y5YDGQOMvWP1DzoZuZYsEI5k='; style-src 'self' pet:; img-src pet: blob: data:; connect-src pet:">
+<meta name="color-scheme" content="light dark">
+<title>desk-pet</title>
+<link rel="stylesheet" href="settings.css">
+<script type="importmap">{"imports":{"i18next":"pet://app/node_modules/i18next/dist/esm/i18next.js"}}</script>
+<script type="module" src="app.ts"></script>
+</head>
+<body>
+<div id="app" class="app" aria-busy="true"></div>
+</body>
+</html>

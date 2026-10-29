@@ -1,0 +1,33 @@
+{
+  "name": "desk-pet",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "A Windows 11 pixel desktop pet framework (Electron): characters walk on windows, hide, react to clicks, and can talk through an LLM.",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zeroa234/desk-pet.git"
+  },
+  "main": "src/main/main.ts",
+  "scripts": {
+    "start": "electron src/main/main.ts",
+    "shortcut": "pwsh -NoProfile -File scripts/make-shortcut.ps1",
+    "validate:packs": "node scripts/validate-pack.ts",
+    "test": "node --test tests/*.test.ts tests/*.test.mjs",
+    "typecheck": "tsc -p ."
+  },
+  "dependencies": {
+    "i18next": "26.4.5",
+    "json-logic-js": "^2.0.5",
+    "koffi": "3.3.2",
+    "pinyin-pro": "3.29.5"
+  },
+  "devDependencies": {
+    "@types/json-logic-js": "^2.0.8",
+    "@types/node": "24.19.1",
+    "axe-core": "4.14.0",
+    "electron": "44.5.1",
+    "typescript": "6.0.3"
+  }
+}

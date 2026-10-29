@@ -1,0 +1,93 @@
+{
+  "decision": "ollama-clef",
+  "routes": {
+    "line": "ollama-text",
+    "reaction": "ollama-text",
+    "duo": "ollama-text",
+    "reply": "ollama-text",
+    "adult-line": "ollama-text",
+    "talk": "ollama-text",
+    "vision": "ollama-text"
+  },
+  "characters": {},
+  "providers": {
+    "ollama-clef": {
+      "baseUrl": "https://ollama.com/v1",
+      "model": "clef",
+      "account": "ollama",
+      "keyEnv": "OLLAMA_API_KEY",
+      "secretName": "ollama",
+      "concurrency": 1,
+      "jsonMode": "none",
+      "cachedTokensField": null,
+      "timeoutMs": 15000
+    },
+    "ollama-text": {
+      "baseUrl": "https://ollama.com/v1",
+      "model": "deepseek-v4.1-flash:1017",
+      "account": "ollama",
+      "keyEnv": "OLLAMA_API_KEY",
+      "secretName": "ollama",
+      "concurrency": 1,
+      "jsonMode": "json_object",
+      "cachedTokensField": "prompt_tokens_details.cached_tokens",
+      "timeoutMs": 20000,
+      "images": true
+    }
+  },
+  "decisionIntervalSec": 60,
+  "reactionIntervalSec": 6,
+  "debounce": {
+    "quietSec": 1,
+    "maxWaitSec": 2.5,
+    "maxTriggers": 10
+  },
+  "proactive": {
+    "intervalSec": 300,
+    "adultIntervalSec": 120,
+    "globalGapSec": 90
+  },
+  "talk": {
+    "maxExchanges": 4
+  },
+  "context": {
+    "maxTurns": 50,
+    "dropTurns": 30,
+    "maxChars": 24000,
+    "decisionTurns": 6,
+    "summaryChars": 600
+  },
+  "minChoiceProbability": null,
+  "hourlyRequests": 200,
+  "dailyUsd": null,
+  "dailyTokens": null,
+  "maxTokens": {
+    "line": 768,
+    "reaction": 768,
+    "duo": 1536,
+    "reply": 768,
+    "adult-line": 768,
+    "talk": 768,
+    "memory": 1024,
+    "vision": 1024
+  },
+  "vision": {
+    "enabled": false,
+    "auto": false,
+    "scope": "screen",
+    "intervalSec": 600,
+    "staggerSec": 15,
+    "blacklist": [
+      "1password.exe",
+      "bitwarden.exe",
+      "keepass.exe",
+      "keepassxc.exe",
+      "lastpass.exe",
+      "wechat.exe",
+      "weixin.exe",
+      "qq.exe",
+      "telegram.exe",
+      "signal.exe"
+    ]
+  }
+}

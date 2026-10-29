@@ -1,0 +1,4 @@
+{
+  "ollama-clef": {"input": 0.24, "cached": 0.24, "output": 0},
+  "ollama-text": {"input": 0.30, "cached": 0.006, "output": 1.20}
+}

@@ -1,0 +1,35 @@
+{
+  "_comment": "Behavior config for the Mage demo character (format: src/behavior/mind.ts MindConfig). All numbers are starting values; tweak freely.",
+  "schema": 1,
+  "dialogueBanned": [],
+  "stats": {
+    "stamina": {"start": 80, "toward": 80, "towardPerHour": 20},
+    "mood": {"start": 60, "toward": 60, "towardPerHour": 10}
+  },
+  "relations": {"user": {"affection": 40}},
+  "reactions": {
+    "discovered": {"steps": [{"do": "play", "action": "coy", "sec": 1.5, "state": "discovered", "fx": "alert"}], "effects": {"stats.mood": -5}},
+    "click": [
+      {"_comment": "Poked 6+ times within a minute: casts a spell at you", "when": {">=": [{"var": "user.pokes"}, 6]}, "weight": 100, "fx": "alert",
+        "effects": {"stats.mood": -3, "relations.user.affection": -1}, "steps": [{"do": "play", "action": "cast", "state": "react"}]},
+      {"fx": "heart", "effects": {"stats.mood": 3, "relations.user.affection": 1}, "steps": [{"do": "play", "action": "wave", "state": "react"}]},
+      {"fx": "alert", "steps": [{"do": "play", "action": "idle", "sec": 0.8, "state": "react"}]}
+    ],
+    "stroke": {"fx": "heart", "cooldown": 4, "effects": {"stats.mood": 3, "relations.user.affection": 1}, "steps": [{"do": "play", "action": "idle", "sec": 2, "state": "react"}]}
+  },
+  "behaviors": [
+    {"id": "idle", "weight": 2, "steps": [{"do": "idle", "sec": [3, 15]}]},
+    {"id": "wander", "weight": 4, "steps": [{"do": "wander"}], "effects": {"start": {"stats.stamina": -0.05}}},
+    {"id": "sit", "weight": 2, "cooldown": 30, "when": {"==": [{"var": "self.support"}, "window"]}, "steps": [{"do": "sit", "sec": [10, 60]}], "effects": {"end": {"stats.stamina": 3}}},
+    {"id": "hide-peek", "_comment": "Crouch-walk behind a window, peek out for a while, come back out", "weight": 1, "cooldown": 120,
+      "when": {">": [{"var": "env.hideSpots"}, 0]}, "steps": [{"do": "gotoHide", "action": "crouchwalk"}, {"do": "hide", "action": "crouch", "sec": [8, 20]}, {"do": "unhide"}]},
+    {"id": "hop", "_comment": "Jump to another reachable surface (window top edge or floor)", "weight": 0.8, "cooldown": 90, "steps": [{"do": "hop"}]},
+    {"id": "enter-window", "_comment": "Jump into the window she is standing on", "when": {"==": [{"var": "self.support"}, "window"]}, "weight": 0.6, "cooldown": 240, "steps": [{"do": "enter"}]},
+    {"id": "leave-window", "when": {"==": [{"var": "self.layer"}, "inside"]}, "weight": 0.5, "cooldown": 60, "steps": [{"do": "leave"}]},
+    {"id": "dress", "_comment": "Get dressed again if not wearing the default outfit", "weight": {"if": [{"!=": [{"var": "self.outfit"}, "clothed"]}, 6, 0]}, "steps": [{"do": "outfit", "to": "clothed"}, {"do": "idle", "sec": [1, 2]}]},
+    {"id": "covered-peek", "_comment": "Covered by another window for 3+ s: peek out from the edge", "when": {">=": [{"var": "env.coveredSec"}, 3]}, "weight": 4, "cooldown": 60,
+      "steps": [{"do": "peek", "action": "crouch", "walkAction": "crouchwalk", "sec": [4, 10]}]},
+    {"id": "covered-stay", "_comment": "Covered: treat it as hiding", "when": {">=": [{"var": "env.coveredSec"}, 3]}, "weight": 3, "cooldown": 90, "steps": [{"do": "hideHere", "action": "crouch", "sec": [8, 20]}]},
+    {"id": "covered-emerge", "_comment": "Covered: crouch-walk out", "when": {">=": [{"var": "env.coveredSec"}, 3]}, "weight": 2, "cooldown": 30, "steps": [{"do": "emerge", "action": "crouchwalk"}]}
+  ]
+}

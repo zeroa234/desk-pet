@@ -1,0 +1,15 @@
+# keys and machine-local config
+config/*.local.*
+.env
+.env.*
+
+node_modules/
+
+# runtime data, logs, scratch
+data/
+logs/
+temp/
+output/
+
+# double-click shortcut (contains absolute paths; npm run shortcut)
+desk-pet.lnk
